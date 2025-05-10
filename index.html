@@ -2,34 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Hello World - Telegram WebApp</title>
+  <title>Hello Fullscreen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background-color: #121212;
-      color: white;
+      width: 100%;
+      background-color: #111;
+      color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: Arial, sans-serif;
       font-size: 3em;
+      font-family: sans-serif;
+      cursor: pointer;
     }
   </style>
 </head>
-<body>
+<body id="app">
   Hello World
   <script>
-    // Проверка и вызов Telegram API
-    if (window.Telegram && window.Telegram.WebApp) {
-      const tg = window.Telegram.WebApp;
-      tg.ready();      // Сообщаем Telegram, что WebApp готов
-      tg.expand();     // Расширяем WebApp на весь экран
-    } else {
-      console.warn('Telegram WebApp API не обнаружен. Запусти в Telegram.');
+    async function goFullscreen() {
+      const el = document.documentElement;
+      if (el.requestFullscreen) {
+        await el.requestFullscreen();
+      } else if (el.webkitRequestFullscreen) { // Safari
+        await el.webkitRequestFullscreen();
+      } else if (el.msRequestFullscreen) { // IE11
+        await el.msRequestFullscreen();
+      }
     }
+
+    // Telegram WebApp handling (optional)
+    if (window.Telegram?.WebApp) {
+      Telegram.WebApp.ready();
+      Telegram.WebApp.expand();
+    }
+
+    // Trigger fullscreen on user gesture (required by most browsers)
+    document.getElementById('app').addEventListener('click', () => {
+      goFullscreen();
+    });
   </script>
 </body>
 </html>
