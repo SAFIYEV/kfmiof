@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World - Telegram WebApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #121212;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      font-size: 3em;
+    }
+  </style>
+</head>
+<body>
+  Hello World
+  <script>
+    // Проверка и вызов Telegram API
+    if (window.Telegram && window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
+      tg.ready();      // Сообщаем Telegram, что WebApp готов
+      tg.expand();     // Расширяем WebApp на весь экран
+    } else {
+      console.warn('Telegram WebApp API не обнаружен. Запусти в Telegram.');
+    }
+  </script>
+</body>
+</html>
