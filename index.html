@@ -10,41 +10,29 @@
       padding: 0;
       height: 100%;
       width: 100%;
-      background-color: #111;
-      color: #fff;
+      background-color: #000;
+      color: #0f0;
       display: flex;
       justify-content: center;
       align-items: center;
+      font-family: monospace;
       font-size: 3em;
-      font-family: sans-serif;
       cursor: pointer;
     }
   </style>
 </head>
-<body id="app">
-  Hello World
+<body id="screen">
+  Hello,, World
   <script>
     async function goFullscreen() {
       const el = document.documentElement;
-      if (el.requestFullscreen) {
-        await el.requestFullscreen();
-      } else if (el.webkitRequestFullscreen) { // Safari
-        await el.webkitRequestFullscreen();
-      } else if (el.msRequestFullscreen) { // IE11
-        await el.msRequestFullscreen();
-      }
+      if (el.requestFullscreen) await el.requestFullscreen();
+      else if (el.webkitRequestFullscreen) await el.webkitRequestFullscreen();
+      else if (el.msRequestFullscreen) await el.msRequestFullscreen();
     }
 
-    // Telegram WebApp handling (optional)
-    if (window.Telegram?.WebApp) {
-      Telegram.WebApp.ready();
-      Telegram.WebApp.expand();
-    }
-
-    // Trigger fullscreen on user gesture (required by most browsers)
-    document.getElementById('app').addEventListener('click', () => {
-      goFullscreen();
-    });
+    // Запуск по клику
+    document.getElementById('screen').addEventListener('click', goFullscreen);
   </script>
 </body>
 </html>
